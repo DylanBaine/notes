@@ -1,0 +1,67 @@
+Update Statement:
+    UPDATE table-Name [[AS] correlation-Name]
+    SET column-Name = Value
+    [WHERE clause]
+
+Create Statement:
+    INSERT INTO table
+    (column1, column2, ... column_n )
+    VALUES
+    (expression1, expression2, ... expression_n );
+
+Delete Statement:
+    DELETE FROM table
+    WHERE conditions;
+
+Join Statement: 
+    SELECT columns
+    FROM table1 
+    INNER JOIN table2
+    ON table1.column = table2.column
+    [WHERE table1.other_column = "foo bar"];
+
+Easy Join:
+    SELECT tbla a, tblb b
+    WHERE a.a_id = b.a_id;
+
+Loop:
+    for rec in (select INBOUND_COURSE_TYPE_ID from inbound_course_type
+                where import_success='N' and IS_CSOD_IMPORT = 'Y'
+                and trunc(RECEIVED_DATE) >=trunc(sysdate)
+                order by inbound_course_type_seq asc)
+    loop
+    update inbound_course_type set last_imported_date=sysdate where INBOUND_COURSE_TYPE_ID=rec.INBOUND_COURSE_TYPE_ID;
+    end loop;
+
+
+Join for external report data seed
+    select * from
+    booking b, hr, contact c, account a, course co, course_type ct
+    where
+    b.hr_seq = hr.hr_seq
+    and
+    hr.contact_seq = c.contact_seq
+    and
+    b.billto_account_seq = a.account_seq
+    and
+    b.course_id = co.course_id
+    and
+    b.course_type_id = ct.course_type_id
+    and 
+    b.booking_id like 'EX%';
+
+join external students
+select hr.ace_id, b.*, c.course_id, t.title, cg.name as type
+from
+booking b, course c, course_type t, course_group cg, hr
+where b.course_id = c.course_id
+and hr.hr_seq = b.hr_seq
+and t.course_group_seq = cg.course_group_seq
+and t.course_type_id = c.course_type_id
+and b.lodging_seq != c.lodging_seq
+and cg.name != 'EXTERNAL'
+and b.deleted = 'N'
+and c.cancel = 'N'
+and b.cancel = 'N'
+and b.fiscal_year = '2018'
+order by c.start_date desc;

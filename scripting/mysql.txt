@@ -1,0 +1,20 @@
+Alter table
+    Ex:
+        alter table BOOKING
+        add(FEDERAL NUMBER(1,0), REGPACK_FEE NUMBER(9,2), PAID_DATE DATE, TUITION NUMBER(9,2), SPREAD_SHEET_NAME VARCHAR(512)); 
+        --------------
+        or modify a field
+            alter table COURSE
+            modify(ROOM_ID VARCHAR2(10), TUITION ); 
+
+Create table
+    Ex:
+        CREATE TABLE tcms.job_positions (
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        `title` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+        `position_type_id` int(11) DEFAULT NULL,
+        `parent_position_id` int(11) DEFAULT NULL,
+        `created_at` timestamp NULL DEFAULT NULL,
+        `updated_at` timestamp NULL DEFAULT NULL,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

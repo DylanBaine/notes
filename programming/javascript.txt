@@ -1,0 +1,2 @@
+Open link in new window
+    window.open('http://link.com/link', 'newwindow','width=1500,height=1000'); return false;

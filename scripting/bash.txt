@@ -1,0 +1,136 @@
+Cheat Sheet: http://www.newthinktank.com/2016/06/shell-scripting-tutorial/
+
+Postfix: http://www.soc.napier.ac.uk/~peter/linux/postfix.html
+
+replace charachters in a file
+    replace "search" "replace" -- file.txt
+
+daemon ( make process keep running )
+    to see all:
+        ps -ef
+    to start: 
+        run: nohup [your command] --daemon &
+            then close terminal
+        example: nohup php artisan queue:work --tries=1 --timeout=3600 --daemon &
+    to kill:
+        kill [number to the right of users name that proccess is running under]
+
+get direcroty of script when ran in crontab
+    cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )
+
+restore database from .sql file
+    sudo mysql -u tcms -ppassword to_db < from_db.sql
+
+email a file
+    ./zips/$BACKUP_NAME.zip | mail -s "Odoo Backup" Dylan.J.Baine@usps.gov
+
+secure copy
+    transfer files over ssh 
+        scp -r(<- for recursive) /[dirToCopy] [userOnRemote]@[serverIp]:/[remoteDirectory]
+        scp -ri /.ssh/private_key /[dirToCopy] [userOnRemote]@[serverIp]:/[remoteDirectory]
+
+find pattern in direcotry
+    grep -iRl "<text-to-find>" ./
+    grep -rin "string" ./
+
+
+rsync
+    transfer file over ssh
+        rsync -rvh --progress [fileOrFiles] [userOnRemote]@[serverIp]:/[remoteDirectory]
+
+chown
+    change the owner of a file
+        chown [newOwner] [file]
+
+chmod
+    change file permissions
+        chmod [option (-R)] [version] [file]
+
+grep
+    search a pattern in files in a diretory
+        grep [OPTIONS] PATTERN [FILE...]
+
+find
+    search in a path
+        find [path] [searchParam]
+
+crontab -l
+    see all crons running under logged in userOnRemote
+        crontab -l
+        cron
+
+tar
+    compress files into a zip    
+        tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
+        Here’s what those switches actually mean:
+            -c: Create an archive.
+            -z: Compress the archive with gzip.
+            -v: Display progress in the terminal while creating the archive, also known as “verbose” mode. The v is always optional in these commands, but it’s helpful.
+            -f: Allows you to specify the filename of the archive.
+
+> after any command
+    this logs any output that a command has into a specified file
+    ex: tar -cvf CRONS_ZIP_NAME $STAGE_PATH > $STAGE_PATH/cron-backup-manifest.txt
+
+
+dirname 
+    gives the path name to whatever direcotry you are in
+    ex: dirname 0 returns . because 0 asks for the current direcotry
+
+pwd
+    print the working directory
+
+./backup_dbs.sh | tee -a $LOG_PATH/$LOG_FILE
+    getting output from operating system while a command runs
+
+chmod +x /path/to/yourscript.sh
+    make a script executable
+
+array=()
+    setting an empty array
+
+array=(cat dog)
+    setting an array with "cat" and "dog" as values
+
+${#array[@]}
+    get the length of an array
+
+${array[i]}
+    get the thing in array index i
+
+${var:s:n}
+    get the charachters stored in var from s to n
+    ex: var=hello echo ${var:0:1} = h
+
+var=$((var+1))
+    doing math with variables
+
+dos2unix
+    convert windows script to unix script
+
+export var
+    share a variable among files
+    ex:
+    -----------------------------------------------
+    |    a.sh:                                    |
+    |       #!/bin/sh                             |
+    |       MESSAGE="hello"                       |
+    |       export MESSAGE                        |
+    |       ./b.sh                                |
+    -----------------------------------------------
+    |    b.sh:                                    |
+    |       #!/bin/sh                             |
+    |       echo "The message is: $MESSAGE"       |            
+    -----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+

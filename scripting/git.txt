@@ -1,0 +1,19 @@
+Cheat sheet: file:///C:/Users/VGBDM0/Documents/notes/files/atlassian-git-cheatsheet.pdf
+
+Reset local repo to be just like remote 
+    git fetch origin
+    git reset --hard origin/<BRANCH>
+
+Push branch to remote
+    you can add "--set-upstream" to either of these
+        git push  <REMOTENAME> <LOCALBRANCHNAME>:<REMOTEBRANCHNAME> 
+        git push  <REMOTENAME> <BRANCHNAME> 
+
+See remote branhces
+    git branch -r
+
+See what banch contains a given branch
+    git branch --contains <BRANCH>
+
+make git ignore file modes
+    git config core.fileMode false
