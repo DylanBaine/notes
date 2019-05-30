@@ -1,5 +1,5 @@
-run cmd as mig account
-    runas /user:[domain]\user cmd.exe
+run cmd as other account
+    runas /user:[domain]\user app.exe
 
 manage user role in system
     netplwiz
